@@ -2,7 +2,7 @@
 import argparse
 import glob
 import multiprocessing as mp
-import os
+import os.path as osp
 import time
 import cv2
 import tqdm
@@ -110,19 +110,17 @@ if __name__ == "__main__":
     img_count = 0
     for i in glob.glob(test_images_path):
         print(i)
-        img_name = os.path.basename(i)
-        img_save_path = output_path + img_name.split('.')[0] + '.jpg'
+        sample_name = osp.splitext(osp.basename(i))[0]
+        img_save_path = osp.join(output_path, '{}.png'.format(sample_name))
         img = cv2.imread(i)
         start_time = time.time()
 
         prediction, vis_output, polygons = detection_demo.run_on_image(img)
 
-        txt_save_path = output_path + 'res_img' + img_name.split('.')[0].split('img')[1] + '.txt'
-        save_result_to_txt(txt_save_path,prediction,polygons)
+        txt_save_path = osp.join(output_path, '{}.txt'.format(sample_name))
+        save_result_to_txt(txt_save_path, prediction, polygons)
 
         print("Time: {:.2f} s / img".format(time.time() - start_time))
         vis_output.save(img_save_path)
         img_count += 1
     print("Average Time: {:.2f} s /img".format((time.time() - start_time_all) / img_count))
-
-
