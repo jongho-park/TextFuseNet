@@ -139,6 +139,6 @@ cython_debug/
 
 # Custom
 input_images/
-test_/
+test_*/
 pretrained_models
 pretrained_models/
