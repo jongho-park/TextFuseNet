@@ -44,7 +44,7 @@ def get_parser():
 
     parser.add_argument(
         "--weights",
-        default="./out_dir_r101/icdar2013_model/model_ic13_r101.pth",
+        default="./pretrained_models/model_ic13_r101.pth",
         metavar="pth",
         help="the model used to inference",
     )

@@ -44,7 +44,7 @@ def get_parser():
 
     parser.add_argument(
         "--weights",
-        default="../out_dir_r101/ctw1500_model/model_ctw_r101.pth",
+        default="./pretrained_models/model_ctw_r101.pth",
         metavar="pth",
         help="the model used to inference",
     )
@@ -82,10 +82,10 @@ def compute_polygon_area(points):
     s = 0
     point_num = len(points)
     if(point_num < 3): return 0.0
-    for i in range(point_num): 
+    for i in range(point_num):
         s += points[i][1] * (points[i-1][0] - points[(i+1)%point_num][0])
     return abs(s/2.0)
-    
+
 
 def save_result_to_txt(txt_save_path,prediction,polygons):
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         img_save_path = output_path + img_name.split('.')[0] + '.jpg'
         img = cv2.imread(i)
         start_time = time.time()
-  
+
         prediction, vis_output, polygons = detection_demo.run_on_image(img)
 
         txt_save_path = output_path + 'res_img' + img_name.split('.')[0] + '.txt'
