@@ -52,7 +52,6 @@ def get_parser():
     parser.add_argument(
         "--input",
         default="./input_images/*.jpg",
-        nargs="+",
         help="the folder of icdar2013 test images"
     )
 
@@ -108,6 +107,7 @@ if __name__ == "__main__":
 
     start_time_all = time.time()
     img_count = 0
+    print(test_images_path)
     for i in glob.glob(test_images_path):
         print(i)
         sample_name = osp.splitext(osp.basename(i))[0]
